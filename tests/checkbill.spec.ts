@@ -168,5 +168,18 @@ test('extract all USN data including room → final JSON array', async ({ page }
         }
     }
 
-    console.log('FINAL_JSON_ARRAY:', JSON.stringify(finalResults, null, 2));
+    try {
+        const res = await page.request.post(
+            "https://api.susheel.dev/api/electricity/addData",
+            {
+                headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                data: JSON.stringify(finalResults)
+            }
+        );
+        console.log("POST response status:", res.status());
+        const text = await res.text();
+        console.log("POST response body (text):", text);
+    } catch (e) {
+        console.error("Failed to POST data:", e);
+    }
 });
