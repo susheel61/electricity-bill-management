@@ -1,11 +1,26 @@
 {
-  "name": "electricity-bill-management",
+  "name": "tall",
   "version": "1.0.0",
-  "description": "Managing the current bills and understand easy and track",
+  "description": "",
+  "homepage": "https://github.com/susheel61/electricity-bill-management#readme",
+  "bugs": {
+    "url": "https://github.com/susheel61/electricity-bill-management/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/susheel61/electricity-bill-management.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug"
   },
-  "author": "susheels",
-  "license": "ISC"
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.1"
+  }
 }
