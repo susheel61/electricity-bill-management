@@ -60,18 +60,28 @@ export function Dashboard({ bills }: DashboardProps) {
     return (
         <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-                <header className="mb-10 text-center md:text-left">
-                    <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl mb-2">
-                        Electricity Bills
-                    </h1>
-                    <p className="text-lg text-gray-600">Manage and track your utility expenses with ease.</p>
+                <header className="mb-10 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div className="text-center md:text-left">
+                        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl mb-2">
+                            Electricity Bill Manager
+                        </h1>
+                        <p className="text-lg text-gray-600">
+                            A project by <a href="https://susheel.dev" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline font-semibold">Susheel Singh</a>
+                        </p>
+                    </div>
+                    <div className="hidden md:block">
+                        {/* Placeholder for a logo if available, or just a styled text badge */}
+                        <div className="bg-gray-900 text-white px-4 py-2 rounded-lg font-bold tracking-widest border-2 border-gray-800 shadow-lg">
+                            SUSHEEL.DEV
+                        </div>
+                    </div>
                 </header>
+
 
                 {/* Stats Overview */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                     <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex flex-col items-center md:items-start">
                         <span className="text-sm font-medium text-gray-500 uppercase tracking-wider">Total Due</span>
-                        <span className="text-3xl font-bold text-red-600 mt-2">₹{totalDue.toFixed(2)}</span>
                     </div>
                     <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex flex-col items-center md:items-start">
                         <span className="text-sm font-medium text-gray-500 uppercase tracking-wider">Paid Bills</span>
