@@ -7,5 +7,7 @@ export async function getBills(): Promise<Bill[]> {
         throw new Error('Failed to fetch bills');
     }
 
-    return res.json();
+    const bills: Bill[] = await res.json();
+    return bills.filter(bill => bill.amount > 0);
 }
+
