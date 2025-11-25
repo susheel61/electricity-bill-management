@@ -1,5 +1,7 @@
 import { Bill } from '../types/bill';
 
+import { tenantMap } from '../data/tenants';
+
 export async function getBills(): Promise<Bill[]> {
     const res = await fetch('https://api.susheel.dev/api/electricity', { cache: 'no-store' });
 
@@ -8,21 +10,6 @@ export async function getBills(): Promise<Bill[]> {
     }
 
     const bills: Bill[] = await res.json();
-
-    const tenantMap: Record<number, string> = {
-        1: "Ramdev",
-        2: "Dharmendar",
-        3: "Swamy",
-        4: "Sarita",
-        5: "Anil",
-        6: "Raghu",
-        7: "Vikas",
-        8: "Dharamveer",
-        9: "Karamveer",
-        10: "Rocky",
-        11: "Ashok",
-        12: "Riya"
-    };
 
     return bills.map(bill => ({
         ...bill,
