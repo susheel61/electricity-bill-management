@@ -13,5 +13,6 @@ export const tenantMap: Record<number, string> = {
     12: "Riya",
     13: "Sanjay",
     14: "Sanjay",
-    15: "New Tenant"
+    15: "New Tenant",
+    16: "Owner"
 };

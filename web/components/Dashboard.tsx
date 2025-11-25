@@ -57,8 +57,9 @@ export function Dashboard({ bills }: DashboardProps) {
     const paidCount = filteredBills.filter(b => !!b.paidDate || b.amount === 0).length;
     const unpaidCount = filteredBills.length - paidCount;
 
-    const regularBills = filteredBills.filter(bill => bill.amount > 0);
-    const subsidizedBills = filteredBills.filter(bill => bill.amount === 0);
+    const ownerBill = filteredBills.find(bill => bill.roomNumber === 16);
+    const regularBills = filteredBills.filter(bill => bill.amount > 0 && bill.roomNumber !== 16);
+    const subsidizedBills = filteredBills.filter(bill => bill.amount === 0 && bill.roomNumber !== 16);
 
     return (
         <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
@@ -140,6 +141,21 @@ export function Dashboard({ bills }: DashboardProps) {
                     </div>
                 </div>
 
+                {/* Owner Bill Section */}
+                {ownerBill && (
+                    <div className="mb-12">
+                        <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                            Owner Bill
+                            <span className="ml-3 px-2.5 py-0.5 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+                                Owner
+                            </span>
+                        </h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <BillCard key={ownerBill._id} bill={ownerBill} />
+                        </div>
+                    </div>
+                )}
+
                 {/* Regular Bills Grid */}
                 <div className="mb-12">
                     <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
@@ -190,4 +206,3 @@ export function Dashboard({ bills }: DashboardProps) {
         </div>
     );
 }
-
