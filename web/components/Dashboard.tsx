@@ -57,6 +57,9 @@ export function Dashboard({ bills }: DashboardProps) {
     const paidCount = filteredBills.filter(b => !!b.paidDate || b.amount === 0).length;
     const unpaidCount = filteredBills.length - paidCount;
 
+    const regularBills = filteredBills.filter(bill => bill.amount > 0);
+    const subsidizedBills = filteredBills.filter(bill => bill.amount === 0);
+
     return (
         <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -82,6 +85,7 @@ export function Dashboard({ bills }: DashboardProps) {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                     <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex flex-col items-center md:items-start">
                         <span className="text-sm font-medium text-gray-500 uppercase tracking-wider">Total Due</span>
+                        <span className="text-3xl font-bold text-red-600 mt-2">₹{totalDue.toFixed(2)}</span>
                     </div>
                     <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100 flex flex-col items-center md:items-start">
                         <span className="text-sm font-medium text-gray-500 uppercase tracking-wider">Paid Bills</span>
@@ -134,12 +138,42 @@ export function Dashboard({ bills }: DashboardProps) {
                     </div>
                 </div>
 
-                {/* Bills Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {filteredBills.map((bill) => (
-                        <BillCard key={bill._id} bill={bill} />
-                    ))}
+                {/* Regular Bills Grid */}
+                <div className="mb-12">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        Regular Bills
+                        <span className="ml-3 px-2.5 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                            {regularBills.length}
+                        </span>
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {regularBills.map((bill) => (
+                            <BillCard key={bill._id} bill={bill} />
+                        ))}
+                    </div>
+                    {regularBills.length === 0 && (
+                        <div className="text-center py-10 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200">
+                            <p className="text-gray-500">No regular bills found matching your criteria.</p>
+                        </div>
+                    )}
                 </div>
+
+                {/* Subsidized Bills Grid */}
+                {subsidizedBills.length > 0 && (
+                    <div>
+                        <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                            Subsidized Bills
+                            <span className="ml-3 px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                {subsidizedBills.length}
+                            </span>
+                        </h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 opacity-75 hover:opacity-100 transition-opacity">
+                            {subsidizedBills.map((bill) => (
+                                <BillCard key={bill._id} bill={bill} />
+                            ))}
+                        </div>
+                    </div>
+                )}
 
                 {filteredBills.length === 0 && (
                     <div className="text-center py-20">
@@ -154,3 +188,4 @@ export function Dashboard({ bills }: DashboardProps) {
         </div>
     );
 }
+

@@ -8,6 +8,5 @@ export async function getBills(): Promise<Bill[]> {
     }
 
     const bills: Bill[] = await res.json();
-    return bills.filter(bill => bill.amount > 0);
+    return bills;
 }
-
