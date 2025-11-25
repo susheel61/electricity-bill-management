@@ -8,5 +8,24 @@ export async function getBills(): Promise<Bill[]> {
     }
 
     const bills: Bill[] = await res.json();
-    return bills;
+
+    const tenantMap: Record<number, string> = {
+        1: "Ramdev",
+        2: "Dharmendar",
+        3: "Swamy",
+        4: "Sarita",
+        5: "Anil",
+        6: "Raghu",
+        7: "Vikas",
+        8: "Dharamveer",
+        9: "Karamveer",
+        10: "Rocky",
+        11: "Ashok",
+        12: "Riya"
+    };
+
+    return bills.map(bill => ({
+        ...bill,
+        tenantName: tenantMap[bill.roomNumber]
+    }));
 }

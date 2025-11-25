@@ -9,4 +9,6 @@ export interface Bill {
     room: string;
     serviceNo: string;
     roomNumber: number;
+    tenantName?: string;
 }
+

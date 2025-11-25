@@ -22,12 +22,17 @@ export function BillCard({ bill }: BillCardProps) {
                             <span className="text-xs font-medium px-2 py-0.5 rounded bg-gray-100 text-gray-600 border border-gray-200">
                                 Room {bill.roomNumber}
                             </span>
+                            {bill.tenantName && (
+                                <span className="text-xs font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-100">
+                                    {bill.tenantName}
+                                </span>
+                            )}
                             <span className="text-xs text-gray-400 font-mono">{bill.usn}</span>
                         </div>
                     </div>
                     <span className={`px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase ${isPaid
-                            ? 'bg-green-50 text-green-700 border border-green-100'
-                            : 'bg-red-50 text-red-700 border border-red-100'
+                        ? 'bg-green-50 text-green-700 border border-green-100'
+                        : 'bg-red-50 text-red-700 border border-red-100'
                         }`}>
                         {isPaid ? 'Paid' : 'Unpaid'}
                     </span>
